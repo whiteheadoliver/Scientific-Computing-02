@@ -1,0 +1,31 @@
+This code allows the user to test the accuracy of the supervised image classification method-Principal Component Analysis (PCA) using k-nearest neighbours as the classifier. 
+
+The key algorithm for PCA is:
+1.      Reshape the pixel data  for each image into a 2D vector.
+2.	Input each 2D image vector as a matrix column.
+2.      Calculate the covariance matrix.
+3.      Apply eigenvalue decomposition.
+4.      Select how many Principal Components (eigenvectors of covariance matrix which represent key image features) you want to use.
+5.	Images are made up of a weighted combination of the principal components. Hence we classify a test picture based on the weights it has associated with the key principal components chosen.
+6.	Use k-nearest neighbours to find which base pictures have a similar weighting associated with those principal components. The test picture identifier is then approximated by the identifier associated with the most commonly appearing identifier in its' neighbours.
+
+A database of images needs to be used in the program, where a selection of these are to be used as a base dataset and and selection will be used as a test dataset (no images are used in both sets). The base data set is a training data set in which we know the identifier of each image. K-nearest neighbours looks at images from the test set and indentifies the most similar pictures from the base data set. As we know the identifiers from the base data set, we should be able to work out the person identifier for images in the test set. In this case we actually know the indentifiers for the images in the test set as well, hence we can compare these to those calculated by k-nearest neighbour and assess the accuracy of the classifier.
+
+
+
+
+RUNNING THE CODE:
+1) First download 'fea' and 'gnd' from the Yale database and ensure these are in the same matlab path as the code.* If instead you would like to try the code with the MNIST number pictures, download the MNIST.mat file and make sure this is in your workspace.
+2) Simply press run. The code will then prompt you for further input along the way.**
+
+
+*Data to be inputted:
+This code is designed to take in Yale face data given by the document 'fea'- after transposing this data, we have a p*m matrix where each column represents a vectorised image. Hence the image identifier represents which person is in the image- as there are 38 people the identifiers are the numbers 1-38.
+There are up to 64 separately taken images of each person. All vectorised images of a certain person are in adjacent columns.
+There is also an m-length index vector file 'gnd'. The jth element g_j in 'gnd' gives the person
+indentifier (from 1-38) for the vectorised picture represented in column j of 'fea'.
+
+**The first section of the code allows the user to input which people they would like included in the analysis. They can then choose how many many pictures of each person they want in the base set, how many facial features/eigenfaces they want to use in the comparisons, and how big k is when running k-nearest neighbours.
+
+
+
