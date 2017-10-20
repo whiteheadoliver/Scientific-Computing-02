@@ -1,21 +1,23 @@
-%Choose which image data base to look at
+
+load('MNIST.mat')
+load('YaleB_32x32.mat')
+
+
 DataBase=input(['Would you like to look at the Yale face or MNIST Number data base?'...
     'Type "Yale" or "Numbers" to specify. '...
     '\n'],'s');
 
-
-%Request number of eigenfaces to be used when comparing pictures
 m=input(['How many facial/image features would you like the analyse? (up to 784 for the MNIST database'...
     '\n or 1024 for the Yale database) '...
     '\n']);
-%Request how many nearest neighbours to use when running k-nearest neighbours    
+   
 k=input(['How big would you like k when running k-nearest neighbours? (1 to 5 usually suffices)'...
     '\n']);
 
 if strcmp(DataBase,'Yale')==1
 
 
-    X0=fea'; %Transpose fea'
+    X0=fea';
 
     %******************* Section1 ************************************  
     %*****************************************************************
@@ -31,14 +33,11 @@ if strcmp(DataBase,'Yale')==1
 
 
 
-
-    %Requests number of pictures of each person which are to used in the training set
     n= input(['How many photos of each person would you like in the training set? (up to 59)'...
         '\nAny remaining photos of that person will be used in the test set'...
         '\n']) ;
  
-    
-   %Requests vector indicating which people indentifiers from 1-38 are included in the analysis
+
     people=input(['Please select which people you would like to use in the analysis (from 1-38).',...
         '\nE.g. For persons 1 and 6 type [1,6]. Or for persons 1,2 and 20 to 38 type [1,2,20:38] including square brackets..',...
         '\nRanges should be specified with the colon operator (:).',...
@@ -59,14 +58,10 @@ if strcmp(DataBase,'Yale')==1
     %The other remaining column indices for pictures of person i are to be
     %used in the test set.
     for i=1:(length(people))
-        Repeats= (IndexMatrix1(i,3)-IndexMatrix1(i,2)+1);%Number of repeated pictures of person i
-        Indices=randsample(IndexMatrix1(i,2):IndexMatrix1(i,3),Repeats); %Randomly permuted index vector of
-        %columns for person i in X0=fea
-        BaseColumnIndex(((i-1)*n+1):i*n,1)=sort(Indices(1:n)); %Contains n column indices (of X0) for corresponding
-        %to person i
-        TestColumnIndex(((i-1)*(Repeats-n)+1):(i*(Repeats-n)))=sort(Indices((n+1):Repeats)); %Contains all other
-        %column indices (of X0) for person i
-
+        Repeats= (IndexMatrix1(i,3)-IndexMatrix1(i,2)+1);
+        Indices=randsample(IndexMatrix1(i,2):IndexMatrix1(i,3),Repeats); 
+        BaseColumnIndex(((i-1)*n+1):i*n,1)=sort(Indices(1:n)); 
+        TestColumnIndex(((i-1)*(Repeats-n)+1):(i*(Repeats-n)))=sort(Indices((n+1):Repeats)); 
     end
 
     BaseColumnIndex=BaseColumnIndex(find(BaseColumnIndex)); %remove extra zeros

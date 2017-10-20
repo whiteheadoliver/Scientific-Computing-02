@@ -15,15 +15,16 @@ A database of images needs to be used in the program, where a selection of these
 
 
 RUNNING THE CODE:
-1) First download 'fea' and 'gnd' from the Yale database and ensure these are in the same matlab path as the code.* If instead you would like to try the code with the MNIST number pictures, download the MNIST.mat file and make sure this is in your workspace.
-2) Simply press run. The code will then prompt you for further input along the way.**
+1) First download 'fea' and 'gnd' from the Yale database and ensure these are in the same matlab path as the code.* If instead you would like to try the code with the MNIST number pictures, download the MNIST.mat file from the github repository as well.
+2) Simply load the ImageDeclassification.m file and press run. The code will then prompt you for further input along the way.**
 
 
 *Data to be inputted:
-This code is designed to take in Yale face data given by the document 'fea'- after transposing this data, we have a p*m matrix where each column represents a vectorised image. Hence the image identifier represents which person is in the image- as there are 38 people the identifiers are the numbers 1-38.
+This code is designed to take in the Yale face or MNIST number databases. The Yale data is given by the document 'fea'- after transposing this data, we have a p*m matrix where each column represents a vectorised image. Hence the image identifier represents which person is in the image- as there are 38 people the identifiers are the numbers 1-38.
 There are up to 64 separately taken images of each person. All vectorised images of a certain person are in adjacent columns.
 There is also an m-length index vector file 'gnd'. The jth element g_j in 'gnd' gives the person
 indentifier (from 1-38) for the vectorised picture represented in column j of 'fea'.
+The MNIST data is already separated into two matrices- giving pixel data for the training and test images separately. There are also two vectors giving the corresponding identifiers of the images in each column of these matrices.
 
 **The first section of the code allows the user to input which people they would like included in the analysis. They can then choose how many many pictures of each person they want in the base set, how many facial features/eigenfaces they want to use in the comparisons, and how big k is when running k-nearest neighbours.
 
