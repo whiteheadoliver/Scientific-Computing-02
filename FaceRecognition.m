@@ -27,7 +27,7 @@ if k==1
 else
 BestGuess=mode(IKNearest')';
 end
-%Output how successful the classification was.
+
 SuccessRate=sum(BestGuess==TestLabels)/length(TestLabels);
 fprintf('Success rate = %.3g %%\n',100*SuccessRate)
 
@@ -91,17 +91,15 @@ while Reply == 'y'
     Scat=[Xf(R(1),:)',Xf(R(2),:)'];
     hold on
     IxR=unique(BaseLabels);
+    b=a(find(a));
     %If you have specified a lot of people or are using the MNIST Database,
     %the scatter plot will look very cluttered and unclear. So we will only
     %plot a random 4 of these.
-    %Incase there are too many identifiers, pick up to 4 random numbers from the set 
-    r=IxR(sort(randsample(1:length(a),min(4,length(a)))));
+    r=IxR(sort(randsample(1:length(b),min(4,length(b)))));
     Legend=[];
-    b=a;
     while isempty(Scat)==0
-    %Only plot data for theidentifiers with the random numbers picked above
+    %Only plot data for the identifiers with the random numbers picked above
         if isempty(r)==0 && r(1)==IxR(1)
-    %Scatter plot each identifier in a different colour
     s=scatter(Scat(1:b(1),1),Scat(1:b(1),2),'filled');
     s.SizeData=20;
     Legend=[Legend;IxR(1)];
